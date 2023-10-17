@@ -32,15 +32,14 @@ if __name__ == '__main__':
         from model.cnnlstm import CNNLSTM, data_reshape
         dataset = data_reshape(dataset)
         model = CNNLSTM(dataset.train_x)
-        model = model.fit(dataset.train_x, dataset.train_y, epochs=world.epoch, batch_size=world.batch_size,
+        history = model.fit(dataset.train_x, dataset.train_y, epochs=world.epoch, batch_size=world.batch_size,
                             validation_data=(dataset.test_x, dataset.test_y), verbose=2, shuffle=False)
-        pred_y = model.predict(dataset.test_x)
 
     else:
         raise NotImplementedError()
 
     # 测试结果
-    pred_y = model.predict(test_x=dataset.test_x)
+    pred_y = model.predict(dataset.test_x)
     RMSE = math.sqrt(mean_squared_error(dataset.test_y, pred_y))
     print('\n测试集的MSE：', mean_squared_error(dataset.test_y, pred_y))
     print('\n测试集的RMSE:', RMSE)

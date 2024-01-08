@@ -1,8 +1,8 @@
 # -*- coding: UTF-8 -*-
 from matplotlib import pyplot as plt
 
-plt.rcParams['font.sans-serif'] = [u'SimHei']
-plt.rcParams['axes.unicode_minus'] = False
+# plt.rcParams['font.sans-serif'] = [u'SimHei']
+# plt.rcParams['axes.unicode_minus'] = False
 
 
 def plot_result_scatter(dataset, y_pred):
@@ -14,9 +14,9 @@ def plot_result_scatter(dataset, y_pred):
     plt.scatter(time_points, acc, color="r", label="Actual", marker="o", s=10)
     plt.scatter(time_points, pre, color="y", label="Predicted", marker="o", s=10)
 
-    plt.xlabel("时间")
-    plt.ylabel("水量")
-    plt.title("实际值与预测值散点图")
+    plt.xlabel("Time")
+    plt.ylabel("Flow")
+    plt.title("Predicted Flow vs Actual Flow")
     plt.legend()
     plt.show()
     # plt.savefig('stalstmpivot.png')

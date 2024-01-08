@@ -2,6 +2,9 @@
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 import pandas as pd
 import numpy as np
+
+import world
+
 try:
     from torch.utils.data import Dataset
 
@@ -29,7 +32,7 @@ except:
 
 
 class DataLoaderNormalizer:
-    def __init__(self, file_name="pivot_all.xlsx"):
+    def __init__(self, file_name="TIANQI22.832.23.731.xlsx"):
         self.fileName = file_name
 
         self.XScaler = MinMaxScaler()
@@ -38,9 +41,9 @@ class DataLoaderNormalizer:
         self.train_x, self.train_y, self.test_x, self.test_y = None, None, None, None
         self.load_data()
 
-    def load_data(self, sequence_length=48, train_split_ratio=0.8, dim=4, sample=20):
-        data = pd.read_excel(io="../dataset/" + self.fileName,
-                             usecols=['玉泉山瞬时流量', '麻峪瞬时流量', '杏石口瞬时流量', '石景山南线瞬时流量'])
+    def load_data(self, sequence_length=world.sequence_length, train_split_ratio=world.train_split_ratio, dim=world.dim, sample=world.sample_number):
+        data = pd.read_excel(io="../dataset/" + self.fileName)
+        data = data.iloc[:, 1:]  # 去掉第一列
         data = data.dropna()
         data = data[::sample]  # 每20个点取一个值
         data = data.values

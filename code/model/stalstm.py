@@ -354,7 +354,7 @@ class STALSTMModel(BaseEstimator, RegressorMixin):
             alpha_res = torch.concat(alphas, dim=1)
             beta_res = torch.concat(betas, dim=1)
 
-            print('Epoch:{}, Loss:{}'.format(i + 1, self.loss_hist[-1]))
+            print('Loss:{}'.format(self.loss_hist[-1]))
         print('Optimization finished')
         return self
 

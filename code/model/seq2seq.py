@@ -62,8 +62,7 @@ def data_process_final(dataset, y_pred):
     forecast_length = out_seq_len
     truth = dataset.test_y[:, forecast_length-1, -1].ravel()
     forecast = y_pred[:, forecast_length-1].ravel()
-    dataset.test_y = truth
-    return dataset, forecast
+    return truth, forecast
 
 
 class Encoder(nn.Module):
@@ -201,7 +200,7 @@ class SEQ2SEQModel:
 
         total_loss = 0
         self.model.train()
-        for i in range(world.epoch):
+        for i in range(1):
             for X, y in data_loader:
                 X, y = X.to(world.device), y.to(world.device)
                 # Forward pass
@@ -213,7 +212,7 @@ class SEQ2SEQModel:
                 self.optimizer.step()
                 total_loss += loss.item()
             train_avg_loss = total_loss / len(data_loader)
-            print('Epoch:{}, Loss:{}'.format(i + 1, train_avg_loss))
+            print('Loss:{}'.format(train_avg_loss))
         print('Optimization finished')
         return self
 
